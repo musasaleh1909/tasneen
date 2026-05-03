@@ -5,167 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tasneen Eats</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#1a1a1a}
+body{font-family:'Poppins',sans-serif;background:#FFF8F0;color:#1a1a1a}
 .page{display:none}
 .page.active{display:block}
-
-/* ── CUSTOMER MENU ── */
-.menu-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
-.m-header{text-align:center;padding:2.5rem 1rem 1.5rem;border-bottom:1px solid #f0f0f0}
-.logo-circle{width:64px;height:64px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
-.logo-circle span{color:#fff;font-size:22px;font-weight:600;letter-spacing:-1px}
-.hotel-name{font-size:22px;font-weight:600;letter-spacing:1px}
-.tagline{font-size:13px;color:#888;margin-top:4px}
-.m-nav{display:flex;gap:8px;overflow-x:auto;padding:1rem;scrollbar-width:none;position:sticky;top:0;background:#fff;z-index:10;border-bottom:1px solid #f0f0f0}
+.menu-wrap{max-width:480px;margin:0 auto;background:#FFF8F0;min-height:100vh}
+.m-header{text-align:center;padding:0;background:#C0392B;position:relative}
+.m-header-inner{position:relative;z-index:1;padding:2.5rem 1rem 1.75rem}
+.logo-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.logo-circle span{color:#fff;font-size:24px;font-weight:700}
+.hotel-name{font-size:24px;font-weight:700;color:#fff;letter-spacing:.5px}
+.tagline{font-size:13px;color:rgba(255,255,255,0.75);margin-top:4px}
+.m-nav{display:flex;gap:8px;overflow-x:auto;padding:1rem;scrollbar-width:none;position:sticky;top:0;background:#fff;z-index:10;border-bottom:1px solid #f0e8e0}
 .m-nav::-webkit-scrollbar{display:none}
-.m-nav button{white-space:nowrap;padding:6px 16px;border-radius:20px;border:1px solid #e0e0e0;font-size:13px;cursor:pointer;background:transparent;color:#666;transition:all .15s}
-.m-nav button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.m-section{padding:1.5rem 1rem 0.5rem}
-.m-section-title{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:1rem}
-.m-item{display:flex;justify-content:space-between;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
-.m-item:last-child{border-bottom:none}
-.m-item.sold-out{opacity:.45}
-.item-img{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid #f0f0f0}
-.item-img-placeholder{width:72px;height:72px;border-radius:8px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:#ccc}
+.m-nav button{white-space:nowrap;padding:7px 18px;border-radius:20px;border:1.5px solid #e8ddd5;font-size:13px;cursor:pointer;background:#fff;color:#888;transition:all .2s;font-family:'Poppins',sans-serif;font-weight:500}
+.m-nav button.active{background:#C0392B;color:#fff;border-color:#C0392B}
+.m-section{padding:1.25rem 1rem 0.5rem}
+.m-section-title{font-size:11px;font-weight:700;letter-spacing:2.5px;color:#C0392B;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.m-section-title::after{content:'';flex:1;height:1px;background:#f0e8e0}
+.m-item{display:flex;align-items:flex-start;padding:1rem;margin-bottom:10px;background:#fff;border-radius:14px;border:1px solid #f0e8e0;gap:12px}
+.m-item.sold-out{opacity:.5}
+.item-img{width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.item-img-placeholder{width:80px;height:80px;border-radius:10px;background:#FFF0E8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px}
 .item-info{flex:1}
-.item-name{font-size:15px;font-weight:500;margin-bottom:3px}
-.item-desc{font-size:12px;color:#888;line-height:1.5}
+.item-name{font-size:14px;font-weight:600;margin-bottom:3px;color:#1a1a1a}
+.item-desc{font-size:11px;color:#bbb;line-height:1.5}
 .item-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
 .tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
 .tag-veg{background:#eaf3de;color:#3b6d11}
 .tag-spicy{background:#faece7;color:#993c1d}
-.tag-popular{background:#faeeda;color:#854f0b}
+.tag-popular{background:#fff0cc;color:#a06000}
 .tag-sold{background:#f5f5f5;color:#999}
-.item-right{text-align:right;flex-shrink:0}
-.price{font-size:15px;font-weight:500}
-.add-btn{margin-top:8px;width:28px;height:28px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:18px;color:#666;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.add-btn:hover{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.add-btn:disabled{opacity:.3;cursor:not-allowed}
-.divider{height:8px;background:#f5f5f5;margin:.5rem 0}
-.m-footer{text-align:center;padding:1.5rem 1rem 2rem;color:#aaa;font-size:12px;border-top:1px solid #f0f0f0;margin-top:1rem}
-.cart-bar{position:sticky;bottom:0;background:#1a1a1a;color:#fff;padding:1rem 1.5rem;display:none;justify-content:space-between;align-items:center;cursor:pointer}
+.item-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;min-height:80px}
+.price{font-size:15px;font-weight:700;color:#C0392B}
+.add-btn{width:32px;height:32px;border-radius:50%;border:none;background:#C0392B;cursor:pointer;font-size:20px;color:#fff;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.add-btn:hover{background:#a93226;transform:scale(1.1)}
+.add-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.divider{height:4px;margin:.25rem 0}
+.m-footer{text-align:center;padding:1.5rem 1rem 5rem;color:#ccc;font-size:12px}
+.cart-bar{position:sticky;bottom:1rem;margin:0 1rem;border-radius:14px;background:#C0392B;color:#fff;padding:1rem 1.5rem;display:none;justify-content:space-between;align-items:center;cursor:pointer}
 .cart-bar.visible{display:flex}
-.cart-bar span{font-size:14px;font-weight:500}
-
-/* ── CART ── */
-.cart-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;padding:1.5rem 1rem 3rem}
-.back-btn{background:transparent;border:none;font-size:14px;color:#666;cursor:pointer;margin-bottom:1.5rem;padding:0;display:flex;align-items:center;gap:6px}
-.cart-title{font-size:20px;font-weight:600;margin-bottom:1.5rem}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
-.cart-item-name{font-size:14px;font-weight:500}
-.cart-item-price{font-size:13px;color:#888;margin-top:2px}
-.qty-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.qty-btn{width:24px;height:24px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#666}
-.qty-num{font-size:14px;font-weight:500;min-width:16px;text-align:center}
-.cart-total-row{display:flex;justify-content:space-between;padding:1rem 0;font-weight:600;font-size:16px;border-top:2px solid #1a1a1a;margin-top:.5rem}
-.customer-form{margin:1.5rem 0 0}
-.customer-form h3{font-size:14px;font-weight:600;margin-bottom:1rem;color:#1a1a1a}
+.cart-bar span{font-size:14px;font-weight:600}
+.cart-arrow{background:rgba(255,255,255,0.2);border-radius:8px;padding:4px 10px;font-size:13px}
+.cart-wrap{max-width:480px;margin:0 auto;background:#FFF8F0;min-height:100vh;padding:0 0 3rem}
+.cart-header{background:#C0392B;padding:1.5rem 1rem 1.25rem;display:flex;align-items:center;gap:12px}
+.back-btn{background:rgba(255,255,255,0.2);border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cart-title{font-size:18px;font-weight:700;color:#fff}
+.cart-body{padding:1.25rem 1rem}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1rem;margin-bottom:8px;background:#fff;border-radius:12px;border:1px solid #f0e8e0;gap:12px}
+.cart-item-name{font-size:14px;font-weight:600}
+.cart-item-price{font-size:12px;color:#bbb;margin-top:2px}
+.qty-ctrl{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.qty-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid #f0e8e0;background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#C0392B;font-weight:700}
+.qty-btn:hover{background:#FFF0E8}
+.qty-num{font-size:15px;font-weight:700;min-width:18px;text-align:center}
+.cart-total-box{background:#fff;border-radius:12px;border:1px solid #f0e8e0;padding:1rem;margin-bottom:1rem}
+.cart-total-row{display:flex;justify-content:space-between;font-weight:700;font-size:17px;color:#C0392B}
+.customer-form{background:#fff;border-radius:12px;border:1px solid #f0e8e0;padding:1rem;margin-bottom:1rem}
+.customer-form h3{font-size:11px;font-weight:700;margin-bottom:1rem;color:#bbb;text-transform:uppercase;letter-spacing:1.5px}
 .form-field{margin-bottom:12px}
-.form-field label{font-size:12px;color:#888;display:block;margin-bottom:4px}
-.form-field input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;font-family:inherit}
-.form-field input:focus{border-color:#1a1a1a}
-
-/* PromptPay section */
-.promptpay-section{margin:1.5rem 0;background:#f9f9f9;border-radius:12px;padding:1.25rem;text-align:center;border:1px solid #f0f0f0}
-.promptpay-label{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:.75rem}
-.promptpay-logo{display:inline-flex;align-items:center;gap:6px;margin-bottom:.75rem}
-.pp-badge{background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
+.form-field label{font-size:12px;color:#bbb;display:block;margin-bottom:4px;font-weight:500}
+.form-field input{width:100%;padding:11px 14px;border:1.5px solid #f0e8e0;border-radius:10px;font-size:14px;outline:none;font-family:'Poppins',sans-serif;background:#FFF8F0}
+.form-field input:focus{border-color:#C0392B;background:#fff}
+.promptpay-section{margin:0 0 1rem;background:#fff;border-radius:12px;padding:1.25rem;text-align:center;border:1px solid #f0e8e0}
+.promptpay-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#C0392B;text-transform:uppercase;margin-bottom:.75rem}
+.pp-badge{background:#003b7a;color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;display:inline-block;margin-bottom:.75rem}
 .pp-badge span{color:#f5a623}
-.promptpay-qr{max-width:180px;width:100%;border-radius:8px;border:1px solid #e0e0e0;display:block;margin:0 auto}
-.promptpay-hint{font-size:12px;color:#888;margin-top:.75rem;line-height:1.5}
-.no-qr-msg{font-size:13px;color:#aaa;padding:1rem 0}
-.place-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;margin-top:1.25rem}
-.place-btn:hover{background:#333}
-
-/* ── SUCCESS ── */
-.success-msg{text-align:center;padding:3rem 1rem}
-.success-icon{width:60px;height:60px;border-radius:50%;background:#eaf3de;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;color:#3b6d11}
-.success-msg h2{font-size:20px;font-weight:600;margin-bottom:.5rem}
-.success-msg p{font-size:14px;color:#888;line-height:1.6}
-
-/* ── ADMIN LOGIN ── */
-.login-wrap{max-width:400px;margin:6rem auto;padding:2rem;background:#fff;border-radius:12px;border:1px solid #e0e0e0}
-.login-wrap h2{font-size:20px;font-weight:600;margin-bottom:.25rem}
-.login-wrap p{font-size:13px;color:#888;margin-bottom:1.5rem}
-.login-wrap label{font-size:13px;color:#666;display:block;margin-bottom:4px;margin-top:12px}
-.login-wrap input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none}
-.login-wrap input:focus{border-color:#1a1a1a}
-.login-btn{width:100%;padding:12px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;margin-top:1.25rem}
-.login-err{color:#c0392b;font-size:13px;margin-top:8px;display:none}
-.admin-link{text-align:center;margin-top:1.5rem;font-size:13px;color:#aaa}
-.admin-link a{color:#666;text-decoration:underline;cursor:pointer}
-
-/* ── ADMIN PANEL ── */
+.promptpay-qr{max-width:190px;width:100%;border-radius:10px;border:1px solid #f0e8e0;display:block;margin:0 auto}
+.promptpay-hint{font-size:12px;color:#aaa;margin-top:.75rem;line-height:1.6}
+.place-btn{width:100%;padding:15px;background:#C0392B;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif}
+.place-btn:hover{background:#a93226}
+.success-wrap{max-width:480px;margin:0 auto;background:#FFF8F0;min-height:100vh}
+.success-header{background:#C0392B;padding:2rem 1rem 3rem;text-align:center}
+.success-icon{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:32px;color:#fff}
+.success-header h2{font-size:22px;font-weight:700;color:#fff}
+.success-header p{font-size:13px;color:rgba(255,255,255,0.75);margin-top:4px}
+.success-body{padding:1.5rem 1rem;margin-top:-1.5rem}
+.order-num-badge{background:#fff;border-radius:14px;border:2px dashed #C0392B;padding:1rem 1.5rem;text-align:center;margin-bottom:1rem}
+.order-num-badge p{font-size:11px;color:#bbb;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.order-num-badge span{font-size:22px;font-weight:700;letter-spacing:3px;color:#C0392B}
+.login-outer{background:#C0392B;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.login-wrap{width:100%;max-width:360px;padding:2rem;background:#fff;border-radius:18px}
+.login-logo{width:56px;height:56px;border-radius:50%;background:#C0392B;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:22px;font-weight:700;color:#fff}
+.login-wrap h2{font-size:20px;font-weight:700;margin-bottom:.25rem;text-align:center}
+.login-wrap p{font-size:13px;color:#bbb;margin-bottom:1.5rem;text-align:center}
+.login-wrap label{font-size:11px;color:#bbb;display:block;margin-bottom:4px;margin-top:14px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.login-wrap input{width:100%;padding:12px 14px;border:1.5px solid #f0e8e0;border-radius:10px;font-size:14px;outline:none;font-family:'Poppins',sans-serif;background:#FFF8F0}
+.login-wrap input:focus{border-color:#C0392B;background:#fff}
+.login-btn{width:100%;padding:13px;background:#C0392B;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:1.25rem;font-family:'Poppins',sans-serif}
+.login-btn:hover{background:#a93226}
+.login-err{color:#C0392B;font-size:13px;margin-top:8px;display:none;text-align:center;font-weight:500}
+.admin-link{text-align:center;margin-top:1.25rem;font-size:13px;color:rgba(255,255,255,0.6)}
+.admin-link a{color:rgba(255,255,255,0.8);text-decoration:underline;cursor:pointer}
+.admin-outer{background:#FFF8F0;min-height:100vh}
 .admin-wrap{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem}
-.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
-.admin-header h1{font-size:20px;font-weight:600}
-.admin-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid #f0f0f0}
-.admin-tab{padding:8px 18px;border:none;background:transparent;font-size:14px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px}
-.admin-tab.active{color:#1a1a1a;font-weight:500;border-bottom-color:#1a1a1a}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;background:#fff;padding:1rem 1.25rem;border-radius:14px;border:1px solid #f0e8e0}
+.admin-header h1{font-size:17px;font-weight:700;color:#1a1a1a}
+.admin-header h1 span{color:#C0392B}
+.admin-tabs{display:flex;gap:6px;margin-bottom:1.5rem}
+.admin-tab{padding:9px 20px;border:1.5px solid #f0e8e0;background:#fff;font-size:13px;cursor:pointer;color:#aaa;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:500}
+.admin-tab.active{background:#C0392B;color:#fff;border-color:#C0392B}
 .admin-section{display:none}
 .admin-section.active{display:block}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1.5rem}
-.stat-card{background:#f5f5f5;border-radius:8px;padding:1rem}
-.stat-label{font-size:12px;color:#888;margin-bottom:4px}
-.stat-val{font-size:24px;font-weight:500}
-.order-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;margin-bottom:12px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem}
+.stat-card{background:#fff;border-radius:12px;padding:1rem;border:1px solid #f0e8e0;text-align:center}
+.stat-label{font-size:11px;color:#bbb;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stat-val{font-size:26px;font-weight:700;color:#C0392B}
+.order-card{background:#fff;border:1px solid #f0e8e0;border-radius:14px;padding:1rem;margin-bottom:12px}
 .order-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
-.order-num{font-size:14px;font-weight:600}
-.order-time{font-size:12px;color:#aaa;margin-top:2px}
-.order-customer{font-size:13px;color:#555;margin-bottom:.25rem}
-.order-items{font-size:13px;color:#555;line-height:1.7}
-.order-total{font-size:14px;font-weight:600;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0f0f0}
-.order-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;white-space:nowrap}
-.status-new{background:#faeeda;color:#854f0b}
+.order-num{font-size:14px;font-weight:700;color:#C0392B}
+.order-time{font-size:11px;color:#ccc;margin-top:2px}
+.order-customer{font-size:13px;color:#555;margin-bottom:.5rem;background:#FFF8F0;padding:.5rem .75rem;border-radius:8px}
+.order-items{font-size:13px;color:#666;line-height:1.8}
+.order-total{font-size:14px;font-weight:700;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0e8e0}
+.order-status{font-size:11px;padding:4px 12px;border-radius:10px;font-weight:700}
+.status-new{background:#fff0cc;color:#a06000}
 .status-done{background:#eaf3de;color:#3b6d11}
-.mark-done-btn{font-size:12px;padding:5px 12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;color:#666;margin-top:.5rem}
-.mark-done-btn:hover{background:#f5f5f5}
-.add-item-form{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
-.add-item-form h3{font-size:15px;font-weight:500;margin-bottom:1rem}
+.mark-done-btn{font-size:12px;padding:6px 14px;border:1.5px solid #C0392B;border-radius:8px;background:transparent;cursor:pointer;color:#C0392B;margin-top:.75rem;font-weight:600;font-family:'Poppins',sans-serif}
+.mark-done-btn:hover{background:#FFF0E8}
+.add-item-form{background:#fff;border:1px solid #f0e8e0;border-radius:14px;padding:1.25rem;margin-bottom:1.5rem}
+.add-item-form h3{font-size:14px;font-weight:700;margin-bottom:1rem}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .form-group{display:flex;flex-direction:column;gap:4px}
-.form-group label{font-size:12px;color:#888}
-.form-group input,.form-group select,.form-group textarea{padding:8px 10px;border:1px solid #e0e0e0;border-radius:6px;font-size:13px;outline:none;font-family:inherit}
+.form-group label{font-size:11px;color:#bbb;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{padding:9px 12px;border:1.5px solid #f0e8e0;border-radius:8px;font-size:13px;outline:none;font-family:'Poppins',sans-serif;background:#FFF8F0}
 .form-group textarea{resize:vertical;min-height:60px}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#1a1a1a}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#C0392B;background:#fff}
 .form-tags{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
 .tag-check{display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer}
-.save-btn{padding:9px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer}
-.save-btn:hover{background:#333}
+.save-btn{padding:10px 22px;background:#C0392B;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif}
+.save-btn:hover{background:#a93226}
 .menu-mgmt{margin-top:1rem}
-.mgmt-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
+.mgmt-item{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1rem;margin-bottom:8px;background:#fff;border-radius:12px;border:1px solid #f0e8e0;gap:12px}
 .mgmt-item-info{flex:1}
-.mgmt-item-name{font-size:14px;font-weight:500}
-.mgmt-item-sub{font-size:12px;color:#888}
-.mgmt-item-img{width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid #f0f0f0;flex-shrink:0}
-.mgmt-item-img-placeholder{width:44px;height:44px;border-radius:6px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#ccc}
-.img-upload-area{border:2px dashed #e0e0e0;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:border-color .15s}
-.img-upload-area:hover{border-color:#1a1a1a}
-.img-upload-area p{font-size:13px;color:#aaa;margin-bottom:6px}
-.img-preview-thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1px solid #e0e0e0;display:block;margin:0 auto 8px}
-.img-remove-link{font-size:12px;color:#993c1d;cursor:pointer;text-decoration:underline}
+.mgmt-item-name{font-size:14px;font-weight:600}
+.mgmt-item-sub{font-size:12px;color:#bbb}
+.mgmt-item-img{width:48px;height:48px;border-radius:8px;object-fit:cover;border:1px solid #f0e8e0;flex-shrink:0}
+.mgmt-item-img-placeholder{width:48px;height:48px;border-radius:8px;background:#FFF0E8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.img-upload-area{border:2px dashed #f0e8e0;border-radius:10px;padding:1.25rem;text-align:center;cursor:pointer;transition:border-color .15s;background:#FFF8F0}
+.img-upload-area:hover{border-color:#C0392B}
+.img-upload-area p{font-size:13px;color:#ccc;margin-bottom:4px}
+.img-preview-thumb{width:80px;height:80px;border-radius:10px;object-fit:cover;border:1px solid #f0e8e0;display:block;margin:0 auto 8px}
+.img-remove-link{font-size:12px;color:#C0392B;cursor:pointer;text-decoration:underline}
 .mgmt-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
-.toggle-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #e0e0e0;background:transparent;cursor:pointer;color:#666}
+.toggle-btn{font-size:11px;padding:5px 12px;border-radius:8px;border:1.5px solid;background:transparent;cursor:pointer;font-weight:600;font-family:'Poppins',sans-serif}
 .toggle-btn.available{color:#3b6d11;border-color:#c0dd97;background:#eaf3de}
 .toggle-btn.soldout{color:#993c1d;border-color:#f0997b;background:#faece7}
-.del-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #f0997b;background:#faece7;cursor:pointer;color:#993c1d}
-.logout-btn{font-size:13px;padding:6px 14px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;color:#666}
-.logout-btn:hover{background:#f5f5f5}
-.empty-state{text-align:center;padding:3rem 1rem;color:#aaa;font-size:14px}
-.cat-header{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin:1.5rem 0 .5rem}
-
-/* PromptPay admin upload */
-.qr-upload-section{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
-.qr-upload-section h3{font-size:15px;font-weight:500;margin-bottom:.5rem}
-.qr-upload-section p{font-size:13px;color:#888;margin-bottom:1rem}
+.del-btn{font-size:11px;padding:5px 12px;border-radius:8px;border:1.5px solid #f0997b;background:#faece7;cursor:pointer;color:#993c1d;font-weight:600}
+.logout-btn{font-size:13px;padding:7px 16px;border:1.5px solid #f0e8e0;border-radius:8px;background:transparent;cursor:pointer;color:#aaa;font-family:'Poppins',sans-serif;font-weight:500}
+.logout-btn:hover{background:#FFF8F0}
+.empty-state{text-align:center;padding:3rem 1rem;color:#ccc;font-size:14px}
+.cat-header{font-size:11px;font-weight:700;letter-spacing:2px;color:#C0392B;text-transform:uppercase;margin:1.5rem 0 .5rem}
+.qr-upload-section{background:#fff;border:1px solid #f0e8e0;border-radius:14px;padding:1.25rem;margin-bottom:1.5rem}
+.qr-upload-section h3{font-size:14px;font-weight:700;margin-bottom:.5rem}
+.qr-upload-section p{font-size:13px;color:#bbb;margin-bottom:1rem}
 .qr-preview{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-.qr-preview img{width:100px;height:100px;border-radius:8px;border:1px solid #e0e0e0;object-fit:contain}
-.qr-preview-placeholder{width:100px;height:100px;border-radius:8px;border:2px dashed #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#aaa;text-align:center;padding:8px}
-.qr-upload-btn{padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;font-size:13px;color:#555}
-.qr-upload-btn:hover{background:#f5f5f5}
-.qr-remove-btn{padding:8px 16px;border:1px solid #f0997b;border-radius:6px;background:#faece7;cursor:pointer;font-size:13px;color:#993c1d}
-.qr-status{font-size:12px;color:#3b6d11;margin-top:4px;display:none}
+.qr-preview img{width:100px;height:100px;border-radius:10px;border:1px solid #f0e8e0;object-fit:contain}
+.qr-preview-placeholder{width:100px;height:100px;border-radius:10px;border:2px dashed #f0e8e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#ccc;text-align:center;padding:8px}
+.qr-upload-btn{padding:8px 18px;border:1.5px solid #f0e8e0;border-radius:8px;background:transparent;cursor:pointer;font-size:13px;color:#666;font-family:'Poppins',sans-serif;font-weight:500}
+.qr-upload-btn:hover{background:#FFF8F0}
+.qr-remove-btn{padding:8px 18px;border:1.5px solid #f0997b;border-radius:8px;background:#faece7;cursor:pointer;font-size:13px;color:#993c1d;font-family:'Poppins',sans-serif;font-weight:500}
+.qr-status{font-size:12px;color:#3b6d11;margin-top:8px;display:none;font-weight:600}
 </style>
 </head>
 <body>
@@ -174,9 +175,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="page-menu" class="page active">
   <div class="menu-wrap">
     <div class="m-header">
-      <div class="logo-circle"><span>TE</span></div>
-      <div class="hotel-name">Tasneen Eats</div>
-      <div class="tagline">Fresh ingredients · Honest flavours</div>
+      <div class="m-header-inner">
+        <div class="logo-circle"><span>TE</span></div>
+        <div class="hotel-name">Tasneen Eats</div>
+        <div class="tagline">Fresh ingredients · Honest flavours</div>
+      </div>
     </div>
     <div class="m-nav" id="menu-nav"></div>
     <div id="menu-items"></div>
@@ -191,40 +194,52 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- CART PAGE -->
 <div id="page-cart" class="page">
   <div class="cart-wrap">
-    <button class="back-btn" onclick="showPage('page-menu')">← Back to menu</button>
-    <div class="cart-title">Your order</div>
+    <div class="cart-header">
+      <button class="back-btn" onclick="showPage('page-menu')">&#8592;</button>
+      <div class="cart-title">Your order</div>
+    </div>
+    <div class="cart-body">
     <div id="cart-items-list"></div>
     <div id="cart-summary"></div>
+    </div>
   </div>
 </div>
 
 <!-- ORDER SUCCESS -->
 <div id="page-success" class="page">
-  <div class="cart-wrap">
-    <div class="success-msg">
-      <div class="success-icon">✓</div>
+  <div class="success-wrap">
+    <div class="success-header">
+      <div class="success-icon">&#10003;</div>
       <h2>Order placed!</h2>
-      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.</p>
-      <div id="success-order-num" style="margin:1rem auto;padding:.75rem 1.5rem;background:#f5f5f5;border-radius:8px;display:inline-block;font-size:18px;font-weight:600;letter-spacing:2px"></div>
-      <div id="success-qr-section" style="margin-top:1rem"></div>
-      <button class="place-btn" style="margin-top:1.5rem;max-width:280px" onclick="showPage('page-menu')">Back to menu</button>
+      <p>Your order is on its way to the kitchen</p>
+    </div>
+    <div class="success-body">
+      <div class="order-num-badge">
+        <p>Your order number</p>
+        <span id="success-order-num"></span>
+      </div>
+      <div id="success-qr-section"></div>
+      <button class="place-btn" onclick="showPage('page-menu')">Back to menu</button>
     </div>
   </div>
 </div>
 
 <!-- ADMIN LOGIN -->
 <div id="page-login" class="page">
-  <div class="login-wrap">
-    <h2>Admin login</h2>
-    <p>Tasneen Eats management portal</p>
-    <label>Username</label>
-    <input type="text" id="login-user" placeholder="admin" />
-    <label>Password</label>
-    <input type="password" id="login-pass" placeholder="••••••••" />
-    <div class="login-err" id="login-err">Incorrect username or password</div>
-    <button class="login-btn" onclick="doLogin()">Sign in</button>
+  <div class="login-outer">
+    <div class="login-wrap">
+      <div class="login-logo">TE</div>
+      <h2>Admin login</h2>
+      <p>Tasneen Eats management portal</p>
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="admin" />
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••" />
+      <div class="login-err" id="login-err">Incorrect username or password</div>
+      <button class="login-btn" onclick="doLogin()">Sign in</button>
+    </div>
+    <div class="admin-link"><a onclick="showPage('page-menu')">&#8592; Back to customer menu</a></div>
   </div>
-  <div class="admin-link"><a onclick="showPage('page-menu')">← Back to customer menu</a></div>
 </div>
 
 <!-- ADMIN PANEL -->
@@ -470,7 +485,7 @@ function renderCart(){
     :'';
 
   document.getElementById('cart-summary').innerHTML=`
-    <div class="cart-total-row"><span>Total</span><span>฿${total.toLocaleString()}</span></div>
+    <div class="cart-total-box"><div class="cart-total-row"><span>Total</span><span>฿${total.toLocaleString()}</span></div></div>
     ${qrHtml}
     <div class="customer-form">
       <h3>Your details</h3>
@@ -513,7 +528,7 @@ function placeOrder(){
   cart={};
   updateCartBar();
 
-  document.getElementById('success-order-num').textContent='Order: '+orderNum;
+  document.getElementById('success-order-num').textContent = orderNum;
 
   const qrData=getQR();
   const qrSection=document.getElementById('success-qr-section');
