@@ -195,8 +195,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="success-msg">
       <div class="success-icon">✓</div>
       <h2>Order placed!</h2>
-      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.<br><br>Please complete your payment via PromptPay if you haven't already.</p>
-      <button class="place-btn" style="margin-top:2rem;max-width:280px" onclick="showPage('page-menu')">Back to menu</button>
+      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.</p>
+      <div id="success-order-num" style="margin:1rem auto;padding:.75rem 1.5rem;background:#f5f5f5;border-radius:8px;display:inline-block;font-size:18px;font-weight:600;letter-spacing:2px"></div>
+      <div id="success-qr-section" style="margin-top:1rem"></div>
+      <button class="place-btn" style="margin-top:1.5rem;max-width:280px" onclick="showPage('page-menu')">Back to menu</button>
     </div>
   </div>
 </div>
@@ -482,11 +484,29 @@ function placeOrder(){
     return{name:item.name,qty,price:item.price};
   });
   const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  const orderId=Date.now();
+  const orderNum='ORD-'+String(orderId).slice(-4);
   const orders=getOrders();
-  orders.unshift({id:Date.now(),name,phone,items,total,time:new Date().toLocaleTimeString(),date:new Date().toLocaleDateString(),status:'new'});
+  orders.unshift({id:orderId,orderNum,name,phone,items,total,time:new Date().toLocaleTimeString(),date:new Date().toLocaleDateString(),status:'new'});
   saveOrders(orders);
   cart={};
   updateCartBar();
+
+  document.getElementById('success-order-num').textContent='Order: '+orderNum;
+
+  const qrData=getQR();
+  const qrSection=document.getElementById('success-qr-section');
+  if(qrData){
+    qrSection.innerHTML=`
+      <div class="promptpay-section" style="margin-top:1rem">
+        <div class="promptpay-label">Complete your payment</div>
+        <div class="promptpay-logo"><span class="pp-badge">Prompt<span>Pay</span></span></div>
+        <img src="${qrData}" class="promptpay-qr" alt="PromptPay QR"/>
+        <div class="promptpay-hint">Scan to pay <strong>฿${total.toLocaleString()}</strong><br>Reference: ${orderNum}</div>
+      </div>`;
+  } else {
+    qrSection.innerHTML='';
+  }
   showPage('page-success');
 }
 
@@ -531,7 +551,7 @@ function renderOrdersTab(){
     <div class="order-card">
       <div class="order-header">
         <div>
-          <div class="order-num">Order #${String(o.id).slice(-4)}</div>
+          <div class="order-num">${o.orderNum||'Order #'+String(o.id).slice(-4)}</div>
           <div class="order-time">${o.date} at ${o.time}</div>
         </div>
         <span class="order-status ${o.status==='new'?'status-new':'status-done'}">${o.status==='new'?'New':'Done'}</span>
