@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasneen Eats</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#1a1a1a}
+.page{display:none}
+.page.active{display:block}
+
+/* ── CUSTOMER MENU ── */
+.menu-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.m-header{text-align:center;padding:2.5rem 1rem 1.5rem;border-bottom:1px solid #f0f0f0}
+.logo-circle{width:64px;height:64px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.logo-circle span{color:#fff;font-size:22px;font-weight:600;letter-spacing:-1px}
+.hotel-name{font-size:22px;font-weight:600;letter-spacing:1px}
+.tagline{font-size:13px;color:#888;margin-top:4px}
+.m-nav{display:flex;gap:8px;overflow-x:auto;padding:1rem;scrollbar-width:none;position:sticky;top:0;background:#fff;z-index:10;border-bottom:1px solid #f0f0f0}
+.m-nav::-webkit-scrollbar{display:none}
+.m-nav button{white-space:nowrap;padding:6px 16px;border-radius:20px;border:1px solid #e0e0e0;font-size:13px;cursor:pointer;background:transparent;color:#666;transition:all .15s}
+.m-nav button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.m-section{padding:1.5rem 1rem 0.5rem}
+.m-section-title{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:1rem}
+.m-item{display:flex;justify-content:space-between;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
+.m-item:last-child{border-bottom:none}
+.m-item.sold-out{opacity:.45}
+.item-img{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid #f0f0f0}
+.item-img-placeholder{width:72px;height:72px;border-radius:8px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:#ccc}
+.item-info{flex:1}
+.item-name{font-size:15px;font-weight:500;margin-bottom:3px}
+.item-desc{font-size:12px;color:#888;line-height:1.5}
+.item-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.tag-veg{background:#eaf3de;color:#3b6d11}
+.tag-spicy{background:#faece7;color:#993c1d}
+.tag-popular{background:#faeeda;color:#854f0b}
+.tag-sold{background:#f5f5f5;color:#999}
+.item-right{text-align:right;flex-shrink:0}
+.price{font-size:15px;font-weight:500}
+.add-btn{margin-top:8px;width:28px;height:28px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:18px;color:#666;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.add-btn:hover{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.add-btn:disabled{opacity:.3;cursor:not-allowed}
+.divider{height:8px;background:#f5f5f5;margin:.5rem 0}
+.m-footer{text-align:center;padding:1.5rem 1rem 2rem;color:#aaa;font-size:12px;border-top:1px solid #f0f0f0;margin-top:1rem}
+.cart-bar{position:sticky;bottom:0;background:#1a1a1a;color:#fff;padding:1rem 1.5rem;display:none;justify-content:space-between;align-items:center;cursor:pointer}
+.cart-bar.visible{display:flex}
+.cart-bar span{font-size:14px;font-weight:500}
+
+/* ── CART ── */
+.cart-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;padding:1.5rem 1rem 3rem}
+.back-btn{background:transparent;border:none;font-size:14px;color:#666;cursor:pointer;margin-bottom:1.5rem;padding:0;display:flex;align-items:center;gap:6px}
+.cart-title{font-size:20px;font-weight:600;margin-bottom:1.5rem}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
+.cart-item-name{font-size:14px;font-weight:500}
+.cart-item-price{font-size:13px;color:#888;margin-top:2px}
+.qty-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.qty-btn{width:24px;height:24px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#666}
+.qty-num{font-size:14px;font-weight:500;min-width:16px;text-align:center}
+.cart-total-row{display:flex;justify-content:space-between;padding:1rem 0;font-weight:600;font-size:16px;border-top:2px solid #1a1a1a;margin-top:.5rem}
+.customer-form{margin:1.5rem 0 0}
+.customer-form h3{font-size:14px;font-weight:600;margin-bottom:1rem;color:#1a1a1a}
+.form-field{margin-bottom:12px}
+.form-field label{font-size:12px;color:#888;display:block;margin-bottom:4px}
+.form-field input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;font-family:inherit}
+.form-field input:focus{border-color:#1a1a1a}
+
+/* PromptPay section */
+.promptpay-section{margin:1.5rem 0;background:#f9f9f9;border-radius:12px;padding:1.25rem;text-align:center;border:1px solid #f0f0f0}
+.promptpay-label{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:.75rem}
+.promptpay-logo{display:inline-flex;align-items:center;gap:6px;margin-bottom:.75rem}
+.pp-badge{background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
+.pp-badge span{color:#f5a623}
+.promptpay-qr{max-width:180px;width:100%;border-radius:8px;border:1px solid #e0e0e0;display:block;margin:0 auto}
+.promptpay-hint{font-size:12px;color:#888;margin-top:.75rem;line-height:1.5}
+.no-qr-msg{font-size:13px;color:#aaa;padding:1rem 0}
+.place-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;margin-top:1.25rem}
+.place-btn:hover{background:#333}
+
+/* ── SUCCESS ── */
+.success-msg{text-align:center;padding:3rem 1rem}
+.success-icon{width:60px;height:60px;border-radius:50%;background:#eaf3de;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;color:#3b6d11}
+.success-msg h2{font-size:20px;font-weight:600;margin-bottom:.5rem}
+.success-msg p{font-size:14px;color:#888;line-height:1.6}
+
+/* ── ADMIN LOGIN ── */
+.login-wrap{max-width:400px;margin:6rem auto;padding:2rem;background:#fff;border-radius:12px;border:1px solid #e0e0e0}
+.login-wrap h2{font-size:20px;font-weight:600;margin-bottom:.25rem}
+.login-wrap p{font-size:13px;color:#888;margin-bottom:1.5rem}
+.login-wrap label{font-size:13px;color:#666;display:block;margin-bottom:4px;margin-top:12px}
+.login-wrap input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none}
+.login-wrap input:focus{border-color:#1a1a1a}
+.login-btn{width:100%;padding:12px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;margin-top:1.25rem}
+.login-err{color:#c0392b;font-size:13px;margin-top:8px;display:none}
+.admin-link{text-align:center;margin-top:1.5rem;font-size:13px;color:#aaa}
+.admin-link a{color:#666;text-decoration:underline;cursor:pointer}
+
+/* ── ADMIN PANEL ── */
+.admin-wrap{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.admin-header h1{font-size:20px;font-weight:600}
+.admin-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid #f0f0f0}
+.admin-tab{padding:8px 18px;border:none;background:transparent;font-size:14px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px}
+.admin-tab.active{color:#1a1a1a;font-weight:500;border-bottom-color:#1a1a1a}
+.admin-section{display:none}
+.admin-section.active{display:block}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1.5rem}
+.stat-card{background:#f5f5f5;border-radius:8px;padding:1rem}
+.stat-label{font-size:12px;color:#888;margin-bottom:4px}
+.stat-val{font-size:24px;font-weight:500}
+.order-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;margin-bottom:12px}
+.order-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.order-num{font-size:14px;font-weight:600}
+.order-time{font-size:12px;color:#aaa;margin-top:2px}
+.order-customer{font-size:13px;color:#555;margin-bottom:.25rem}
+.order-items{font-size:13px;color:#555;line-height:1.7}
+.order-total{font-size:14px;font-weight:600;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0f0f0}
+.order-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;white-space:nowrap}
+.status-new{background:#faeeda;color:#854f0b}
+.status-done{background:#eaf3de;color:#3b6d11}
+.mark-done-btn{font-size:12px;padding:5px 12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;color:#666;margin-top:.5rem}
+.mark-done-btn:hover{background:#f5f5f5}
+.add-item-form{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.add-item-form h3{font-size:15px;font-weight:500;margin-bottom:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:12px;color:#888}
+.form-group input,.form-group select,.form-group textarea{padding:8px 10px;border:1px solid #e0e0e0;border-radius:6px;font-size:13px;outline:none;font-family:inherit}
+.form-group textarea{resize:vertical;min-height:60px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#1a1a1a}
+.form-tags{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
+.tag-check{display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer}
+.save-btn{padding:9px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer}
+.save-btn:hover{background:#333}
+.menu-mgmt{margin-top:1rem}
+.mgmt-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
+.mgmt-item-info{flex:1}
+.mgmt-item-name{font-size:14px;font-weight:500}
+.mgmt-item-sub{font-size:12px;color:#888}
+.mgmt-item-img{width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid #f0f0f0;flex-shrink:0}
+.mgmt-item-img-placeholder{width:44px;height:44px;border-radius:6px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#ccc}
+.img-upload-area{border:2px dashed #e0e0e0;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:border-color .15s}
+.img-upload-area:hover{border-color:#1a1a1a}
+.img-upload-area p{font-size:13px;color:#aaa;margin-bottom:6px}
+.img-preview-thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1px solid #e0e0e0;display:block;margin:0 auto 8px}
+.img-remove-link{font-size:12px;color:#993c1d;cursor:pointer;text-decoration:underline}
+.mgmt-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.toggle-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #e0e0e0;background:transparent;cursor:pointer;color:#666}
+.toggle-btn.available{color:#3b6d11;border-color:#c0dd97;background:#eaf3de}
+.toggle-btn.soldout{color:#993c1d;border-color:#f0997b;background:#faece7}
+.del-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #f0997b;background:#faece7;cursor:pointer;color:#993c1d}
+.logout-btn{font-size:13px;padding:6px 14px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;color:#666}
+.logout-btn:hover{background:#f5f5f5}
+.empty-state{text-align:center;padding:3rem 1rem;color:#aaa;font-size:14px}
+.cat-header{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin:1.5rem 0 .5rem}
+
+/* PromptPay admin upload */
+.qr-upload-section{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.qr-upload-section h3{font-size:15px;font-weight:500;margin-bottom:.5rem}
+.qr-upload-section p{font-size:13px;color:#888;margin-bottom:1rem}
+.qr-preview{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.qr-preview img{width:100px;height:100px;border-radius:8px;border:1px solid #e0e0e0;object-fit:contain}
+.qr-preview-placeholder{width:100px;height:100px;border-radius:8px;border:2px dashed #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#aaa;text-align:center;padding:8px}
+.qr-upload-btn{padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;font-size:13px;color:#555}
+.qr-upload-btn:hover{background:#f5f5f5}
+.qr-remove-btn{padding:8px 16px;border:1px solid #f0997b;border-radius:6px;background:#faece7;cursor:pointer;font-size:13px;color:#993c1d}
+.qr-status{font-size:12px;color:#3b6d11;margin-top:4px;display:none}
+</style>
+</head>
+<body>
+
+<!-- CUSTOMER MENU -->
+<div id="page-menu" class="page active">
+  <div class="menu-wrap">
+    <div class="m-header">
+      <div class="logo-circle"><span>TE</span></div>
+      <div class="hotel-name">Tasneen Eats</div>
+      <div class="tagline">Fresh ingredients · Honest flavours</div>
+    </div>
+    <div class="m-nav" id="menu-nav"></div>
+    <div id="menu-items"></div>
+    <div class="m-footer">All prices inclusive of taxes</div>
+  </div>
+  <div class="cart-bar" id="cart-bar" onclick="showPage('page-cart')">
+    <span id="cart-count-label">0 items</span>
+    <span id="cart-total-label">฿0 →</span>
+  </div>
+</div>
+
+<!-- CART PAGE -->
+<div id="page-cart" class="page">
+  <div class="cart-wrap">
+    <button class="back-btn" onclick="showPage('page-menu')">← Back to menu</button>
+    <div class="cart-title">Your order</div>
+    <div id="cart-items-list"></div>
+    <div id="cart-summary"></div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS -->
+<div id="page-success" class="page">
+  <div class="cart-wrap">
+    <div class="success-msg">
+      <div class="success-icon">✓</div>
+      <h2>Order placed!</h2>
+      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.</p>
+      <div id="success-order-num" style="margin:1rem auto;padding:.75rem 1.5rem;background:#f5f5f5;border-radius:8px;display:inline-block;font-size:18px;font-weight:600;letter-spacing:2px"></div>
+      <div id="success-qr-section" style="margin-top:1rem"></div>
+      <button class="place-btn" style="margin-top:1.5rem;max-width:280px" onclick="showPage('page-menu')">Back to menu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div id="page-login" class="page">
+  <div class="login-wrap">
+    <h2>Admin login</h2>
+    <p>Tasneen Eats management portal</p>
+    <label>Username</label>
+    <input type="text" id="login-user" placeholder="admin" />
+    <label>Password</label>
+    <input type="password" id="login-pass" placeholder="••••••••" />
+    <div class="login-err" id="login-err">Incorrect username or password</div>
+    <button class="login-btn" onclick="doLogin()">Sign in</button>
+  </div>
+  <div class="admin-link"><a onclick="showPage('page-menu')">← Back to customer menu</a></div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="page-admin" class="page">
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <h1>Tasneen Eats — Admin</h1>
+      <button class="logout-btn" onclick="doLogout()">Sign out</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('tab-orders',this)">Orders</button>
+      <button class="admin-tab" onclick="switchTab('tab-menu',this)">Menu</button>
+      <button class="admin-tab" onclick="switchTab('tab-settings',this)">Settings</button>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders" class="admin-section active">
+      <div class="stats-grid" id="stats-grid"></div>
+      <div id="orders-list"></div>
+    </div>
+
+    <!-- MENU TAB -->
+    <div id="tab-menu" class="admin-section">
+      <div class="add-item-form">
+        <h3>Add new dish</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dish name</label>
+            <input type="text" id="f-name" placeholder="e.g. Pad Thai" />
+          </div>
+          <div class="form-group">
+            <label>Price (฿)</label>
+            <input type="number" id="f-price" placeholder="250" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="f-cat">
+              <option value="Starters">Starters</option>
+              <option value="Mains">Mains</option>
+              <option value="Grills">Grills</option>
+              <option value="Drinks">Drinks</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tags</label>
+            <div class="form-tags">
+              <label class="tag-check"><input type="checkbox" id="t-veg"> Veg</label>
+              <label class="tag-check"><input type="checkbox" id="t-spicy"> Spicy</label>
+              <label class="tag-check"><input type="checkbox" id="t-popular"> Popular</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:12px">
+          <label>Description</label>
+          <textarea id="f-desc" placeholder="Short description..."></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:12px">
+          <label>Food photo (optional)</label>
+          <div class="img-upload-area" onclick="document.getElementById('f-img-input').click()" id="img-upload-area">
+            <p>Click to upload a photo</p>
+            <p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>
+          </div>
+          <input type="file" id="f-img-input" accept="image/*" style="display:none" onchange="handleDishImg(event)">
+        </div>
+        <button class="save-btn" onclick="addDish()">Add dish</button>
+      </div>
+      <div class="menu-mgmt" id="menu-mgmt"></div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="admin-section">
+      <div class="qr-upload-section">
+        <h3>PromptPay QR code</h3>
+        <p>Upload your PromptPay QR code image. Customers will see it at checkout to scan and pay.</p>
+        <div class="qr-preview" id="qr-preview-area">
+          <div class="qr-preview-placeholder" id="qr-placeholder">No QR uploaded yet</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="qr-upload-btn" onclick="document.getElementById('qr-file-input').click()">Upload QR image</button>
+          <button class="qr-remove-btn" id="qr-remove-btn" style="display:none" onclick="removeQR()">Remove QR</button>
+        </div>
+        <input type="file" id="qr-file-input" accept="image/*" style="display:none" onchange="handleQRUpload(event)">
+        <div class="qr-status" id="qr-status">QR code saved successfully!</div>
+      </div>
+
+      <div class="add-item-form">
+        <h3>Change admin password</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>New username</label>
+            <input type="text" id="new-user" placeholder="admin" />
+          </div>
+          <div class="form-group">
+            <label>New password</label>
+            <input type="password" id="new-pass" placeholder="••••••••" />
+          </div>
+        </div>
+        <button class="save-btn" onclick="saveCredentials()">Save credentials</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden admin link -->
+<div style="text-align:center;padding:1rem;font-size:11px">
+  <a onclick="showPage('page-login')" style="color:#ddd;cursor:pointer;text-decoration:none">Admin</a>
+</div>
+
+<script>
+function getCredentials(){
+  try{const d=localStorage.getItem('te_creds');return d?JSON.parse(d):{user:'admin',pass:'tasneen123'}}catch(e){return{user:'admin',pass:'tasneen123'}}
+}
+function getMenu(){try{const d=localStorage.getItem('te_menu');return d?JSON.parse(d):DEFAULT_MENU()}catch(e){return DEFAULT_MENU()}}
+function saveMenu(m){localStorage.setItem('te_menu',JSON.stringify(m))}
+function getOrders(){try{const d=localStorage.getItem('te_orders');return d?JSON.parse(d):[]}catch(e){return[]}}
+function saveOrders(o){localStorage.setItem('te_orders',JSON.stringify(o))}
+function getQR(){return localStorage.getItem('te_qr')||null}
+function saveQR(data){localStorage.setItem('te_qr',data)}
+function removeQRData(){localStorage.removeItem('te_qr')}
+
+function DEFAULT_MENU(){return[
+  {id:1,name:'Crispy Vegetable Rolls',desc:'Seasonal vegetables, glass noodles, sweet chilli dip',price:120,cat:'Starters',tags:['veg','popular'],available:true},
+  {id:2,name:'Chicken Satay',desc:'Grilled chicken skewers, peanut sauce, cucumber relish',price:150,cat:'Starters',tags:['popular'],available:true},
+  {id:3,name:'Tom Yum Soup',desc:'Spicy lemongrass broth, mushrooms, lime, chilli',price:180,cat:'Starters',tags:['spicy'],available:true},
+  {id:4,name:'Pad Thai',desc:'Stir-fried rice noodles, egg, bean sprouts, peanuts',price:220,cat:'Mains',tags:['popular'],available:true},
+  {id:5,name:'Green Curry',desc:'Coconut milk, Thai basil, green chilli, jasmine rice',price:260,cat:'Mains',tags:['spicy','popular'],available:true},
+  {id:6,name:'Massaman Curry',desc:'Slow-cooked beef, potato, peanuts, coconut cream',price:280,cat:'Mains',tags:[],available:true},
+  {id:7,name:'Grilled Seabass',desc:'Whole grilled seabass, lemon herb butter, steamed vegetables',price:450,cat:'Grills',tags:['popular'],available:true},
+  {id:8,name:'BBQ Pork Ribs',desc:'Slow-cooked ribs, tamarind glaze, coleslaw',price:380,cat:'Grills',tags:['popular'],available:true},
+  {id:9,name:'Fresh Coconut',desc:'Whole young coconut, chilled',price:80,cat:'Drinks',tags:['veg','popular'],available:true},
+  {id:10,name:'Thai Iced Tea',desc:'Strongly brewed tea, condensed milk, crushed ice',price:70,cat:'Drinks',tags:['veg'],available:true},
+  {id:11,name:'Mango Smoothie',desc:'Fresh mango, yoghurt, honey',price:90,cat:'Drinks',tags:['veg'],available:true},
+  {id:12,name:'Soft Drinks',desc:'Coke, Sprite, water',price:40,cat:'Drinks',tags:[],available:true},
+]}
+
+let cart={};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='page-menu') renderMenu();
+  if(id==='page-cart') renderCart();
+  if(id==='page-admin'){renderAdmin();}
+  window.scrollTo(0,0);
+}
+
+function renderMenu(){
+  const menu=getMenu();
+  const cats=[...new Set(menu.map(i=>i.cat))];
+  document.getElementById('menu-nav').innerHTML=cats.map((c,i)=>
+    `<button class="${i===0?'active':''}" onclick="scrollToCat('cat-${c}',this)">${c}</button>`).join('');
+  let html='';
+  cats.forEach((cat,ci)=>{
+    const items=menu.filter(i=>i.cat===cat);
+    if(!items.length) return;
+    if(ci>0) html+='<div class="divider"></div>';
+    html+=`<div class="m-section" id="cat-${cat}"><div class="m-section-title">${cat}</div>`;
+    items.forEach(item=>{
+      const tags=item.tags.map(t=>`<span class="tag tag-${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
+      const sold=!item.available;
+      const imgHtml=item.img
+        ?`<img src="${item.img}" class="item-img" alt="${item.name}"/>`
+        :`<div class="item-img-placeholder">🍽</div>`;
+      html+=`<div class="m-item${sold?' sold-out':''}">
+        ${imgHtml}
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-desc">${item.desc}</div>
+          <div class="item-tags">${tags}${sold?'<span class="tag tag-sold">Sold out</span>':''}</div>
+        </div>
+        <div class="item-right">
+          <div class="price">฿${item.price.toLocaleString()}</div>
+          <button class="add-btn" ${sold?'disabled':''} onclick="addToCart(${item.id})">+</button>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  document.getElementById('menu-items').innerHTML=html;
+  updateCartBar();
+}
+
+function scrollToCat(id,btn){
+  document.querySelectorAll('.m-nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCartBar();}
+
+function updateCartBar(){
+  const menu=getMenu();
+  let total=0,count=0;
+  Object.entries(cart).forEach(([id,qty])=>{
+    const item=menu.find(i=>i.id==id);
+    if(item){total+=item.price*qty;count+=qty;}
+  });
+  const bar=document.getElementById('cart-bar');
+  if(count>0){
+    bar.classList.add('visible');
+    document.getElementById('cart-count-label').textContent=count+' item'+(count>1?'s':'');
+    document.getElementById('cart-total-label').textContent='฿'+total.toLocaleString()+' →';
+  } else {bar.classList.remove('visible');}
+}
+
+function renderCart(){
+  const menu=getMenu();
+  const entries=Object.entries(cart).filter(([id,qty])=>qty>0);
+  if(!entries.length){
+    document.getElementById('cart-items-list').innerHTML='<div class="empty-state">Your cart is empty</div>';
+    document.getElementById('cart-summary').innerHTML='';
+    return;
+  }
+  let html='',total=0;
+  entries.forEach(([id,qty])=>{
+    const item=menu.find(i=>i.id==id);
+    if(!item) return;
+    total+=item.price*qty;
+    html+=`<div class="cart-item">
+      <div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">฿${item.price.toLocaleString()} each</div>
+      </div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="changeQty(${id},-1)">-</button>
+        <span class="qty-num">${qty}</span>
+        <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('cart-items-list').innerHTML=html;
+
+  const qrData=getQR();
+  const qrHtml=qrData
+    ?`<div class="promptpay-section">
+        <div class="promptpay-label">Pay with PromptPay</div>
+        <div class="promptpay-logo"><span class="pp-badge">Prompt<span>Pay</span></span></div>
+        <img src="${qrData}" class="promptpay-qr" alt="PromptPay QR Code"/>
+        <div class="promptpay-hint">Scan this QR code with your banking app to pay<br><strong>฿${total.toLocaleString()}</strong></div>
+      </div>`
+    :'';
+
+  document.getElementById('cart-summary').innerHTML=`
+    <div class="cart-total-row"><span>Total</span><span>฿${total.toLocaleString()}</span></div>
+    ${qrHtml}
+    <div class="customer-form">
+      <h3>Your details</h3>
+      <div class="form-field">
+        <label>Full name</label>
+        <input type="text" id="cust-name" placeholder="e.g. Somchai Jaidee" />
+      </div>
+      <div class="form-field">
+        <label>Phone number</label>
+        <input type="tel" id="cust-phone" placeholder="e.g. 081-234-5678" />
+      </div>
+    </div>
+    <button class="place-btn" onclick="placeOrder()">Confirm order</button>`;
+}
+
+function changeQty(id,delta){
+  cart[id]=(cart[id]||0)+delta;
+  if(cart[id]<=0) delete cart[id];
+  updateCartBar();
+  renderCart();
+}
+
+function placeOrder(){
+  const name=document.getElementById('cust-name').value.trim();
+  const phone=document.getElementById('cust-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number');return;}
+  const menu=getMenu();
+  const entries=Object.entries(cart).filter(([id,qty])=>qty>0);
+  if(!entries.length) return;
+  const items=entries.map(([id,qty])=>{
+    const item=menu.find(i=>i.id==id);
+    return{name:item.name,qty,price:item.price};
+  });
+  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  const orderId=Date.now();
+  const orderNum='ORD-'+String(orderId).slice(-4);
+  const orders=getOrders();
+  orders.unshift({id:orderId,orderNum,name,phone,items,total,time:new Date().toLocaleTimeString(),date:new Date().toLocaleDateString(),status:'new'});
+  saveOrders(orders);
+  cart={};
+  updateCartBar();
+
+  document.getElementById('success-order-num').textContent='Order: '+orderNum;
+
+  const qrData=getQR();
+  const qrSection=document.getElementById('success-qr-section');
+  if(qrData){
+    qrSection.innerHTML=`
+      <div class="promptpay-section" style="margin-top:1rem">
+        <div class="promptpay-label">Complete your payment</div>
+        <div class="promptpay-logo"><span class="pp-badge">Prompt<span>Pay</span></span></div>
+        <img src="${qrData}" class="promptpay-qr" alt="PromptPay QR"/>
+        <div class="promptpay-hint">Scan to pay <strong>฿${total.toLocaleString()}</strong><br>Reference: ${orderNum}</div>
+      </div>`;
+  } else {
+    qrSection.innerHTML='';
+  }
+  showPage('page-success');
+}
+
+function doLogin(){
+  const creds=getCredentials();
+  const u=document.getElementById('login-user').value;
+  const p=document.getElementById('login-pass').value;
+  if(u===creds.user&&p===creds.pass){
+    document.getElementById('login-err').style.display='none';
+    showPage('page-admin');
+  } else {document.getElementById('login-err').style.display='block';}
+}
+
+function doLogout(){showPage('page-menu');}
+
+function switchTab(id,btn){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  if(id==='tab-menu') renderMenuMgmt();
+  if(id==='tab-orders') renderOrdersTab();
+  if(id==='tab-settings') renderSettingsTab();
+}
+
+function renderAdmin(){renderOrdersTab();renderMenuMgmt();}
+
+function renderOrdersTab(){
+  const orders=getOrders();
+  const newO=orders.filter(o=>o.status==='new');
+  const doneO=orders.filter(o=>o.status==='done');
+  const rev=orders.reduce((s,o)=>s+o.total,0);
+  document.getElementById('stats-grid').innerHTML=`
+    <div class="stat-card"><div class="stat-label">New orders</div><div class="stat-val">${newO.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-val">${doneO.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Total revenue</div><div class="stat-val">฿${rev.toLocaleString()}</div></div>`;
+  if(!orders.length){
+    document.getElementById('orders-list').innerHTML='<div class="empty-state">No orders yet. They will appear here when customers place orders.</div>';
+    return;
+  }
+  document.getElementById('orders-list').innerHTML=orders.map(o=>`
+    <div class="order-card">
+      <div class="order-header">
+        <div>
+          <div class="order-num">${o.orderNum||'Order #'+String(o.id).slice(-4)}</div>
+          <div class="order-time">${o.date} at ${o.time}</div>
+        </div>
+        <span class="order-status ${o.status==='new'?'status-new':'status-done'}">${o.status==='new'?'New':'Done'}</span>
+      </div>
+      <div class="order-customer">👤 ${o.name} &nbsp;|&nbsp; 📞 ${o.phone}</div>
+      <div class="order-items">${o.items.map(i=>`${i.qty}x ${i.name} — ฿${(i.price*i.qty).toLocaleString()}`).join('<br>')}</div>
+      <div class="order-total">Total: ฿${o.total.toLocaleString()}</div>
+      ${o.status==='new'?`<button class="mark-done-btn" onclick="markDone(${o.id})">Mark as done</button>`:''}
+    </div>`).join('');
+}
+
+function markDone(id){
+  const orders=getOrders();
+  const o=orders.find(x=>x.id===id);
+  if(o) o.status='done';
+  saveOrders(orders);
+  renderOrdersTab();
+}
+
+function renderMenuMgmt(){
+  const menu=getMenu();
+  const cats=[...new Set(menu.map(i=>i.cat))];
+  let html='';
+  cats.forEach(cat=>{
+    html+=`<div class="cat-header">${cat}</div>`;
+    menu.filter(i=>i.cat===cat).forEach(item=>{
+      const imgHtml=item.img
+        ?`<img src="${item.img}" class="mgmt-item-img" alt="${item.name}"/>`
+        :`<div class="mgmt-item-img-placeholder">🍽</div>`;
+      html+=`<div class="mgmt-item">
+        ${imgHtml}
+        <div class="mgmt-item-info">
+          <div class="mgmt-item-name">${item.name}</div>
+          <div class="mgmt-item-sub">฿${item.price.toLocaleString()} · ${item.cat}</div>
+        </div>
+        <div class="mgmt-actions">
+          <button class="toggle-btn ${item.available?'available':'soldout'}" onclick="toggleAvail(${item.id})">${item.available?'Available':'Sold out'}</button>
+          <button class="del-btn" onclick="deleteDish(${item.id})">Remove</button>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById('menu-mgmt').innerHTML=html;
+}
+
+function renderSettingsTab(){
+  const qrData=getQR();
+  const area=document.getElementById('qr-preview-area');
+  const placeholder=document.getElementById('qr-placeholder');
+  const removeBtn=document.getElementById('qr-remove-btn');
+  const existing=area.querySelector('img');
+  if(existing) existing.remove();
+  if(qrData){
+    placeholder.style.display='none';
+    const img=document.createElement('img');
+    img.src=qrData;img.style.width='100px';img.style.height='100px';
+    img.style.borderRadius='8px';img.style.border='1px solid #e0e0e0';img.style.objectFit='contain';
+    area.insertBefore(img,area.firstChild);
+    removeBtn.style.display='inline-block';
+  } else {
+    placeholder.style.display='flex';
+    removeBtn.style.display='none';
+  }
+}
+
+function handleQRUpload(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    saveQR(ev.target.result);
+    renderSettingsTab();
+    const status=document.getElementById('qr-status');
+    status.style.display='block';
+    setTimeout(()=>status.style.display='none',2500);
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeQR(){
+  if(!confirm('Remove the PromptPay QR code?')) return;
+  removeQRData();
+  renderSettingsTab();
+}
+
+let pendingDishImg = null;
+
+function handleDishImg(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    pendingDishImg=ev.target.result;
+    document.getElementById('img-upload-area').innerHTML=`
+      <img src="${pendingDishImg}" class="img-preview-thumb" alt="preview"/>
+      <span class="img-remove-link" onclick="clearDishImg(event)">Remove photo</span>`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearDishImg(e){
+  e.stopPropagation();
+  pendingDishImg=null;
+  document.getElementById('f-img-input').value='';
+  document.getElementById('img-upload-area').innerHTML=`<p>Click to upload a photo</p><p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>`;
+}
+
+function addDish(){
+  const name=document.getElementById('f-name').value.trim();
+  const price=parseInt(document.getElementById('f-price').value);
+  const cat=document.getElementById('f-cat').value;
+  const desc=document.getElementById('f-desc').value.trim();
+  if(!name||!price){alert('Please enter a name and price');return;}
+  const tags=[];
+  if(document.getElementById('t-veg').checked) tags.push('veg');
+  if(document.getElementById('t-spicy').checked) tags.push('spicy');
+  if(document.getElementById('t-popular').checked) tags.push('popular');
+  const menu=getMenu();
+  menu.push({id:Date.now(),name,desc,price,cat,tags,available:true,img:pendingDishImg||null});
+  saveMenu(menu);
+  document.getElementById('f-name').value='';
+  document.getElementById('f-price').value='';
+  document.getElementById('f-desc').value='';
+  document.getElementById('t-veg').checked=false;
+  document.getElementById('t-spicy').checked=false;
+  document.getElementById('t-popular').checked=false;
+  pendingDishImg=null;
+  document.getElementById('f-img-input').value='';
+  document.getElementById('img-upload-area').innerHTML=`<p>Click to upload a photo</p><p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>`;
+  renderMenuMgmt();
+}
+
+function deleteDish(id){
+  if(!confirm('Remove this dish?')) return;
+  saveMenu(getMenu().filter(i=>i.id!==id));
+  renderMenuMgmt();
+}
+
+function toggleAvail(id){
+  const menu=getMenu();
+  const item=menu.find(i=>i.id===id);
+  if(item) item.available=!item.available;
+  saveMenu(menu);
+  renderMenuMgmt();
+}
+
+function saveCredentials(){
+  const u=document.getElementById('new-user').value.trim();
+  const p=document.getElementById('new-pass').value.trim();
+  if(!u||!p){alert('Please enter both username and password');return;}
+  localStorage.setItem('te_creds',JSON.stringify({user:u,pass:p}));
+  alert('Credentials updated!');
+}
+
+document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter') doLogin();});
+renderMenu();
+</script>
+
+</body>
+</html>
