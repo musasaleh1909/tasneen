@@ -47,26 +47,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cart-bar span{font-size:14px;font-weight:500}
 
 /* ── CART ── */
-.cart-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;padding:1.5rem 1rem}
+.cart-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;padding:1.5rem 1rem 3rem}
 .back-btn{background:transparent;border:none;font-size:14px;color:#666;cursor:pointer;margin-bottom:1.5rem;padding:0;display:flex;align-items:center;gap:6px}
 .cart-title{font-size:20px;font-weight:600;margin-bottom:1.5rem}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
 .cart-item-name{font-size:14px;font-weight:500}
-.cart-item-price{font-size:14px;color:#888}
-.qty-ctrl{display:flex;align-items:center;gap:8px}
+.cart-item-price{font-size:13px;color:#888;margin-top:2px}
+.qty-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .qty-btn{width:24px;height:24px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#666}
 .qty-num{font-size:14px;font-weight:500;min-width:16px;text-align:center}
-.cart-total{display:flex;justify-content:space-between;padding:1rem 0;font-weight:600;font-size:16px;border-top:2px solid #1a1a1a;margin-top:.5rem}
-.table-input{margin:1.5rem 0}
-.table-input label{font-size:13px;color:#666;display:block;margin-bottom:6px}
-.table-input input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none}
-.table-input input:focus{border-color:#1a1a1a}
-.place-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;margin-top:1rem}
+.cart-total-row{display:flex;justify-content:space-between;padding:1rem 0;font-weight:600;font-size:16px;border-top:2px solid #1a1a1a;margin-top:.5rem}
+.customer-form{margin:1.5rem 0 0}
+.customer-form h3{font-size:14px;font-weight:600;margin-bottom:1rem;color:#1a1a1a}
+.form-field{margin-bottom:12px}
+.form-field label{font-size:12px;color:#888;display:block;margin-bottom:4px}
+.form-field input{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;font-family:inherit}
+.form-field input:focus{border-color:#1a1a1a}
+
+/* PromptPay section */
+.promptpay-section{margin:1.5rem 0;background:#f9f9f9;border-radius:12px;padding:1.25rem;text-align:center;border:1px solid #f0f0f0}
+.promptpay-label{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:.75rem}
+.promptpay-logo{display:inline-flex;align-items:center;gap:6px;margin-bottom:.75rem}
+.pp-badge{background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
+.pp-badge span{color:#f5a623}
+.promptpay-qr{max-width:180px;width:100%;border-radius:8px;border:1px solid #e0e0e0;display:block;margin:0 auto}
+.promptpay-hint{font-size:12px;color:#888;margin-top:.75rem;line-height:1.5}
+.no-qr-msg{font-size:13px;color:#aaa;padding:1rem 0}
+.place-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;margin-top:1.25rem}
 .place-btn:hover{background:#333}
+
+/* ── SUCCESS ── */
 .success-msg{text-align:center;padding:3rem 1rem}
-.success-icon{width:60px;height:60px;border-radius:50%;background:#eaf3de;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:24px}
+.success-icon{width:60px;height:60px;border-radius:50%;background:#eaf3de;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;color:#3b6d11}
 .success-msg h2{font-size:20px;font-weight:600;margin-bottom:.5rem}
-.success-msg p{font-size:14px;color:#888}
+.success-msg p{font-size:14px;color:#888;line-height:1.6}
 
 /* ── ADMIN LOGIN ── */
 .login-wrap{max-width:400px;margin:6rem auto;padding:2rem;background:#fff;border-radius:12px;border:1px solid #e0e0e0}
@@ -77,15 +91,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .login-wrap input:focus{border-color:#1a1a1a}
 .login-btn{width:100%;padding:12px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;margin-top:1.25rem}
 .login-err{color:#c0392b;font-size:13px;margin-top:8px;display:none}
-.admin-link{text-align:center;margin-top:2rem;font-size:13px;color:#aaa}
+.admin-link{text-align:center;margin-top:1.5rem;font-size:13px;color:#aaa}
 .admin-link a{color:#666;text-decoration:underline;cursor:pointer}
 
 /* ── ADMIN PANEL ── */
-.admin-wrap{max-width:800px;margin:0 auto;padding:1.5rem 1rem}
+.admin-wrap{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem}
 .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
 .admin-header h1{font-size:20px;font-weight:600}
-.admin-tabs{display:flex;gap:8px;margin-bottom:1.5rem;border-bottom:1px solid #f0f0f0;padding-bottom:0}
-.admin-tab{padding:8px 16px;border:none;background:transparent;font-size:14px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px}
+.admin-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid #f0f0f0}
+.admin-tab{padding:8px 18px;border:none;background:transparent;font-size:14px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px}
 .admin-tab.active{color:#1a1a1a;font-weight:500;border-bottom-color:#1a1a1a}
 .admin-section{display:none}
 .admin-section.active{display:block}
@@ -94,13 +108,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .stat-label{font-size:12px;color:#888;margin-bottom:4px}
 .stat-val{font-size:24px;font-weight:500}
 .order-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;margin-bottom:12px}
-.order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.order-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
 .order-num{font-size:14px;font-weight:600}
-.order-time{font-size:12px;color:#aaa}
-.order-table{font-size:13px;color:#666;margin-bottom:.5rem}
-.order-items{font-size:13px;color:#555;line-height:1.6}
+.order-time{font-size:12px;color:#aaa;margin-top:2px}
+.order-customer{font-size:13px;color:#555;margin-bottom:.25rem}
+.order-items{font-size:13px;color:#555;line-height:1.7}
 .order-total{font-size:14px;font-weight:600;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0f0f0}
-.order-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600}
+.order-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;white-space:nowrap}
 .status-new{background:#faeeda;color:#854f0b}
 .status-done{background:#eaf3de;color:#3b6d11}
 .mark-done-btn{font-size:12px;padding:5px 12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;color:#666;margin-top:.5rem}
@@ -113,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .form-group input,.form-group select,.form-group textarea{padding:8px 10px;border:1px solid #e0e0e0;border-radius:6px;font-size:13px;outline:none;font-family:inherit}
 .form-group textarea{resize:vertical;min-height:60px}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#1a1a1a}
-.form-tags{display:flex;gap:8px;flex-wrap:wrap}
+.form-tags{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
 .tag-check{display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer}
 .save-btn{padding:9px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer}
 .save-btn:hover{background:#333}
@@ -131,11 +145,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .logout-btn:hover{background:#f5f5f5}
 .empty-state{text-align:center;padding:3rem 1rem;color:#aaa;font-size:14px}
 .cat-header{font-size:11px;font-weight:600;letter-spacing:2px;color:#999;text-transform:uppercase;margin:1.5rem 0 .5rem}
+
+/* PromptPay admin upload */
+.qr-upload-section{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.qr-upload-section h3{font-size:15px;font-weight:500;margin-bottom:.5rem}
+.qr-upload-section p{font-size:13px;color:#888;margin-bottom:1rem}
+.qr-preview{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.qr-preview img{width:100px;height:100px;border-radius:8px;border:1px solid #e0e0e0;object-fit:contain}
+.qr-preview-placeholder{width:100px;height:100px;border-radius:8px;border:2px dashed #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#aaa;text-align:center;padding:8px}
+.qr-upload-btn{padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;cursor:pointer;font-size:13px;color:#555}
+.qr-upload-btn:hover{background:#f5f5f5}
+.qr-remove-btn{padding:8px 16px;border:1px solid #f0997b;border-radius:6px;background:#faece7;cursor:pointer;font-size:13px;color:#993c1d}
+.qr-status{font-size:12px;color:#3b6d11;margin-top:4px;display:none}
 </style>
 </head>
 <body>
 
-<!-- CUSTOMER MENU PAGE -->
+<!-- CUSTOMER MENU -->
 <div id="page-menu" class="page active">
   <div class="menu-wrap">
     <div class="m-header">
@@ -145,18 +171,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="m-nav" id="menu-nav"></div>
     <div id="menu-items"></div>
-    <div class="m-footer">All prices inclusive of taxes · Table no. will be confirmed by your server</div>
+    <div class="m-footer">All prices inclusive of taxes</div>
   </div>
   <div class="cart-bar" id="cart-bar" onclick="showPage('page-cart')">
     <span id="cart-count-label">0 items</span>
-    <span id="cart-total-label">Rs. 0 &rarr;</span>
+    <span id="cart-total-label">฿0 →</span>
   </div>
 </div>
 
 <!-- CART PAGE -->
 <div id="page-cart" class="page">
   <div class="cart-wrap">
-    <button class="back-btn" onclick="showPage('page-menu')">&#8592; Back to menu</button>
+    <button class="back-btn" onclick="showPage('page-menu')">← Back to menu</button>
     <div class="cart-title">Your order</div>
     <div id="cart-items-list"></div>
     <div id="cart-summary"></div>
@@ -167,15 +193,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="page-success" class="page">
   <div class="cart-wrap">
     <div class="success-msg">
-      <div class="success-icon">&#10003;</div>
+      <div class="success-icon">✓</div>
       <h2>Order placed!</h2>
-      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.</p>
+      <p>Your order has been sent to the kitchen.<br>We'll bring it to your table shortly.<br><br>Please complete your payment via PromptPay if you haven't already.</p>
       <button class="place-btn" style="margin-top:2rem;max-width:280px" onclick="showPage('page-menu')">Back to menu</button>
     </div>
   </div>
 </div>
 
-<!-- ADMIN LOGIN PAGE -->
+<!-- ADMIN LOGIN -->
 <div id="page-login" class="page">
   <div class="login-wrap">
     <h2>Admin login</h2>
@@ -187,7 +213,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="login-err" id="login-err">Incorrect username or password</div>
     <button class="login-btn" onclick="doLogin()">Sign in</button>
   </div>
-  <div class="admin-link"><a onclick="showPage('page-menu')">&#8592; Back to customer menu</a></div>
+  <div class="admin-link"><a onclick="showPage('page-menu')">← Back to customer menu</a></div>
 </div>
 
 <!-- ADMIN PANEL -->
@@ -200,6 +226,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchTab('tab-orders',this)">Orders</button>
       <button class="admin-tab" onclick="switchTab('tab-menu',this)">Menu</button>
+      <button class="admin-tab" onclick="switchTab('tab-settings',this)">Settings</button>
     </div>
 
     <!-- ORDERS TAB -->
@@ -215,11 +242,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="form-row">
           <div class="form-group">
             <label>Dish name</label>
-            <input type="text" id="f-name" placeholder="e.g. Chicken Biryani" />
+            <input type="text" id="f-name" placeholder="e.g. Pad Thai" />
           </div>
           <div class="form-group">
-            <label>Price (Rs.)</label>
-            <input type="number" id="f-price" placeholder="950" />
+            <label>Price (฿)</label>
+            <input type="number" id="f-price" placeholder="250" />
           </div>
         </div>
         <div class="form-row">
@@ -243,131 +270,162 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label>Description</label>
-          <textarea id="f-desc" placeholder="Short description of the dish..."></textarea>
+          <textarea id="f-desc" placeholder="Short description..."></textarea>
         </div>
         <button class="save-btn" onclick="addDish()">Add dish</button>
       </div>
-
       <div class="menu-mgmt" id="menu-mgmt"></div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="admin-section">
+      <div class="qr-upload-section">
+        <h3>PromptPay QR code</h3>
+        <p>Upload your PromptPay QR code image. Customers will see it at checkout to scan and pay.</p>
+        <div class="qr-preview" id="qr-preview-area">
+          <div class="qr-preview-placeholder" id="qr-placeholder">No QR uploaded yet</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="qr-upload-btn" onclick="document.getElementById('qr-file-input').click()">Upload QR image</button>
+          <button class="qr-remove-btn" id="qr-remove-btn" style="display:none" onclick="removeQR()">Remove QR</button>
+        </div>
+        <input type="file" id="qr-file-input" accept="image/*" style="display:none" onchange="handleQRUpload(event)">
+        <div class="qr-status" id="qr-status">QR code saved successfully!</div>
+      </div>
+
+      <div class="add-item-form">
+        <h3>Change admin password</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>New username</label>
+            <input type="text" id="new-user" placeholder="admin" />
+          </div>
+          <div class="form-group">
+            <label>New password</label>
+            <input type="password" id="new-pass" placeholder="••••••••" />
+          </div>
+        </div>
+        <button class="save-btn" onclick="saveCredentials()">Save credentials</button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Hidden admin link -->
+<div style="text-align:center;padding:1rem;font-size:11px">
+  <a onclick="showPage('page-login')" style="color:#ddd;cursor:pointer;text-decoration:none">Admin</a>
+</div>
+
 <script>
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'tasneen123';
-
-const DEFAULT_MENU = [
-  {id:1,name:'Crispy Vegetable Rolls',desc:'Seasonal vegetables, glass noodles, sweet chilli dip',price:650,cat:'Starters',tags:['veg','popular'],available:true},
-  {id:2,name:'Chicken Tikka Bites',desc:'Marinated chicken, mint chutney, pickled onions',price:850,cat:'Starters',tags:['spicy','popular'],available:true},
-  {id:3,name:'Mushroom Soup',desc:'Creamy wild mushroom, truffle oil, toasted bread',price:550,cat:'Starters',tags:['veg'],available:true},
-  {id:4,name:'Butter Chicken',desc:'Slow-cooked chicken in rich tomato-cream sauce, served with naan',price:1250,cat:'Mains',tags:['popular'],available:true},
-  {id:5,name:'Lamb Karahi',desc:'Tender lamb, tomatoes, ginger, green chilli, fresh coriander',price:1550,cat:'Mains',tags:['spicy'],available:true},
-  {id:6,name:'Paneer Makhani',desc:'Cottage cheese in velvety makhani sauce, steamed basmati rice',price:1100,cat:'Mains',tags:['veg'],available:true},
-  {id:7,name:'Grilled Fish Platter',desc:'Herb-marinated fish fillet, sautéed vegetables, lemon butter sauce',price:1450,cat:'Mains',tags:['popular'],available:true},
-  {id:8,name:'Seekh Kebab',desc:'Minced beef, herbs and spices, charcoal grilled, served with raita',price:1100,cat:'Grills',tags:['spicy','popular'],available:true},
-  {id:9,name:'Mixed Grill Platter',desc:'Chicken boti, seekh kebab, lamb chops, grilled vegetables',price:2200,cat:'Grills',tags:['popular'],available:true},
-  {id:10,name:'Malai Chicken Boti',desc:'Cream-marinated chicken, mild spices, charcoal finish',price:1200,cat:'Grills',tags:[],available:true},
-  {id:11,name:'Fresh Mint Lemonade',desc:'Cold pressed lemon, fresh mint, hint of sugar',price:350,cat:'Drinks',tags:['veg','popular'],available:true},
-  {id:12,name:'Mango Lassi',desc:'Chilled yoghurt, Alphonso mango, cardamom',price:400,cat:'Drinks',tags:['veg'],available:true},
-  {id:13,name:'Rooh Afza Sharbat',desc:'Traditional floral drink, chilled milk, rose water',price:300,cat:'Drinks',tags:['veg'],available:true},
-  {id:14,name:'Soft Drinks',desc:'Pepsi, 7UP, Mirinda, water',price:150,cat:'Drinks',tags:[],available:true},
-];
-
-function getMenu(){try{const d=localStorage.getItem('te_menu');return d?JSON.parse(d):DEFAULT_MENU}catch(e){return DEFAULT_MENU}}
+function getCredentials(){
+  try{const d=localStorage.getItem('te_creds');return d?JSON.parse(d):{user:'admin',pass:'tasneen123'}}catch(e){return{user:'admin',pass:'tasneen123'}}
+}
+function getMenu(){try{const d=localStorage.getItem('te_menu');return d?JSON.parse(d):DEFAULT_MENU()}catch(e){return DEFAULT_MENU()}}
 function saveMenu(m){localStorage.setItem('te_menu',JSON.stringify(m))}
 function getOrders(){try{const d=localStorage.getItem('te_orders');return d?JSON.parse(d):[]}catch(e){return[]}}
 function saveOrders(o){localStorage.setItem('te_orders',JSON.stringify(o))}
+function getQR(){return localStorage.getItem('te_qr')||null}
+function saveQR(data){localStorage.setItem('te_qr',data)}
+function removeQRData(){localStorage.removeItem('te_qr')}
 
-let cart = {};
+function DEFAULT_MENU(){return[
+  {id:1,name:'Crispy Vegetable Rolls',desc:'Seasonal vegetables, glass noodles, sweet chilli dip',price:120,cat:'Starters',tags:['veg','popular'],available:true},
+  {id:2,name:'Chicken Satay',desc:'Grilled chicken skewers, peanut sauce, cucumber relish',price:150,cat:'Starters',tags:['popular'],available:true},
+  {id:3,name:'Tom Yum Soup',desc:'Spicy lemongrass broth, mushrooms, lime, chilli',price:180,cat:'Starters',tags:['spicy'],available:true},
+  {id:4,name:'Pad Thai',desc:'Stir-fried rice noodles, egg, bean sprouts, peanuts',price:220,cat:'Mains',tags:['popular'],available:true},
+  {id:5,name:'Green Curry',desc:'Coconut milk, Thai basil, green chilli, jasmine rice',price:260,cat:'Mains',tags:['spicy','popular'],available:true},
+  {id:6,name:'Massaman Curry',desc:'Slow-cooked beef, potato, peanuts, coconut cream',price:280,cat:'Mains',tags:[],available:true},
+  {id:7,name:'Grilled Seabass',desc:'Whole grilled seabass, lemon herb butter, steamed vegetables',price:450,cat:'Grills',tags:['popular'],available:true},
+  {id:8,name:'BBQ Pork Ribs',desc:'Slow-cooked ribs, tamarind glaze, coleslaw',price:380,cat:'Grills',tags:['popular'],available:true},
+  {id:9,name:'Fresh Coconut',desc:'Whole young coconut, chilled',price:80,cat:'Drinks',tags:['veg','popular'],available:true},
+  {id:10,name:'Thai Iced Tea',desc:'Strongly brewed tea, condensed milk, crushed ice',price:70,cat:'Drinks',tags:['veg'],available:true},
+  {id:11,name:'Mango Smoothie',desc:'Fresh mango, yoghurt, honey',price:90,cat:'Drinks',tags:['veg'],available:true},
+  {id:12,name:'Soft Drinks',desc:'Coke, Sprite, water',price:40,cat:'Drinks',tags:[],available:true},
+]}
+
+let cart={};
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(id==='page-menu') renderMenu();
   if(id==='page-cart') renderCart();
-  if(id==='page-admin') renderAdmin();
+  if(id==='page-admin'){renderAdmin();}
   window.scrollTo(0,0);
 }
 
 function renderMenu(){
-  const menu = getMenu();
-  const cats = [...new Set(menu.map(i=>i.cat))];
-  const nav = document.getElementById('menu-nav');
-  nav.innerHTML = cats.map((c,i)=>`<button class="m-nav-btn ${i===0?'active':''}" onclick="scrollTocat('cat-${c}',this)">${c}</button>`).join('');
-
-  let html = '';
+  const menu=getMenu();
+  const cats=[...new Set(menu.map(i=>i.cat))];
+  document.getElementById('menu-nav').innerHTML=cats.map((c,i)=>
+    `<button class="${i===0?'active':''}" onclick="scrollToCat('cat-${c}',this)">${c}</button>`).join('');
+  let html='';
   cats.forEach((cat,ci)=>{
-    const items = menu.filter(i=>i.cat===cat);
+    const items=menu.filter(i=>i.cat===cat);
     if(!items.length) return;
-    if(ci>0) html += '<div class="divider"></div>';
-    html += `<div class="m-section" id="cat-${cat}"><div class="m-section-title">${cat}</div>`;
+    if(ci>0) html+='<div class="divider"></div>';
+    html+=`<div class="m-section" id="cat-${cat}"><div class="m-section-title">${cat}</div>`;
     items.forEach(item=>{
-      const tags = item.tags.map(t=>`<span class="tag tag-${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
-      const sold = !item.available;
-      html += `<div class="m-item${sold?' sold-out':''}">
+      const tags=item.tags.map(t=>`<span class="tag tag-${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
+      const sold=!item.available;
+      html+=`<div class="m-item${sold?' sold-out':''}">
         <div class="item-info">
           <div class="item-name">${item.name}</div>
           <div class="item-desc">${item.desc}</div>
           <div class="item-tags">${tags}${sold?'<span class="tag tag-sold">Sold out</span>':''}</div>
         </div>
         <div class="item-right">
-          <div class="price">Rs. ${item.price.toLocaleString()}</div>
+          <div class="price">฿${item.price.toLocaleString()}</div>
           <button class="add-btn" ${sold?'disabled':''} onclick="addToCart(${item.id})">+</button>
         </div>
       </div>`;
     });
-    html += '</div>';
+    html+='</div>';
   });
-  document.getElementById('menu-items').innerHTML = html;
+  document.getElementById('menu-items').innerHTML=html;
   updateCartBar();
 }
 
-function scrollTocat(id, btn){
-  document.querySelectorAll('.m-nav-btn').forEach(b=>b.classList.remove('active'));
+function scrollToCat(id,btn){
+  document.querySelectorAll('.m-nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function addToCart(id){
-  cart[id] = (cart[id]||0)+1;
-  updateCartBar();
-}
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCartBar();}
 
 function updateCartBar(){
-  const menu = getMenu();
-  let total=0, count=0;
+  const menu=getMenu();
+  let total=0,count=0;
   Object.entries(cart).forEach(([id,qty])=>{
-    const item = menu.find(i=>i.id==id);
+    const item=menu.find(i=>i.id==id);
     if(item){total+=item.price*qty;count+=qty;}
   });
-  const bar = document.getElementById('cart-bar');
+  const bar=document.getElementById('cart-bar');
   if(count>0){
     bar.classList.add('visible');
-    document.getElementById('cart-count-label').textContent = count+' item'+(count>1?'s':'');
-    document.getElementById('cart-total-label').textContent = 'Rs. '+total.toLocaleString()+' \u2192';
-  } else {
-    bar.classList.remove('visible');
-  }
+    document.getElementById('cart-count-label').textContent=count+' item'+(count>1?'s':'');
+    document.getElementById('cart-total-label').textContent='฿'+total.toLocaleString()+' →';
+  } else {bar.classList.remove('visible');}
 }
 
 function renderCart(){
-  const menu = getMenu();
-  let html='', total=0;
-  const entries = Object.entries(cart).filter(([id,qty])=>qty>0);
+  const menu=getMenu();
+  const entries=Object.entries(cart).filter(([id,qty])=>qty>0);
   if(!entries.length){
     document.getElementById('cart-items-list').innerHTML='<div class="empty-state">Your cart is empty</div>';
     document.getElementById('cart-summary').innerHTML='';
     return;
   }
+  let html='',total=0;
   entries.forEach(([id,qty])=>{
-    const item = menu.find(i=>i.id==id);
+    const item=menu.find(i=>i.id==id);
     if(!item) return;
     total+=item.price*qty;
     html+=`<div class="cart-item">
       <div>
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">Rs. ${item.price.toLocaleString()} each</div>
+        <div class="cart-item-price">฿${item.price.toLocaleString()} each</div>
       </div>
       <div class="qty-ctrl">
         <button class="qty-btn" onclick="changeQty(${id},-1)">-</button>
@@ -377,13 +435,32 @@ function renderCart(){
     </div>`;
   });
   document.getElementById('cart-items-list').innerHTML=html;
+
+  const qrData=getQR();
+  const qrHtml=qrData
+    ?`<div class="promptpay-section">
+        <div class="promptpay-label">Pay with PromptPay</div>
+        <div class="promptpay-logo"><span class="pp-badge">Prompt<span>Pay</span></span></div>
+        <img src="${qrData}" class="promptpay-qr" alt="PromptPay QR Code"/>
+        <div class="promptpay-hint">Scan this QR code with your banking app to pay<br><strong>฿${total.toLocaleString()}</strong></div>
+      </div>`
+    :'';
+
   document.getElementById('cart-summary').innerHTML=`
-    <div class="cart-total"><span>Total</span><span>Rs. ${total.toLocaleString()}</span></div>
-    <div class="table-input">
-      <label>Table number</label>
-      <input type="text" id="table-no" placeholder="e.g. Table 5" />
+    <div class="cart-total-row"><span>Total</span><span>฿${total.toLocaleString()}</span></div>
+    ${qrHtml}
+    <div class="customer-form">
+      <h3>Your details</h3>
+      <div class="form-field">
+        <label>Full name</label>
+        <input type="text" id="cust-name" placeholder="e.g. Somchai Jaidee" />
+      </div>
+      <div class="form-field">
+        <label>Phone number</label>
+        <input type="tel" id="cust-phone" placeholder="e.g. 081-234-5678" />
+      </div>
     </div>
-    <button class="place-btn" onclick="placeOrder()">Place order</button>`;
+    <button class="place-btn" onclick="placeOrder()">Confirm order</button>`;
 }
 
 function changeQty(id,delta){
@@ -394,17 +471,19 @@ function changeQty(id,delta){
 }
 
 function placeOrder(){
-  const tableNo = document.getElementById('table-no').value.trim()||'Not specified';
-  const menu = getMenu();
-  const entries = Object.entries(cart).filter(([id,qty])=>qty>0);
+  const name=document.getElementById('cust-name').value.trim();
+  const phone=document.getElementById('cust-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number');return;}
+  const menu=getMenu();
+  const entries=Object.entries(cart).filter(([id,qty])=>qty>0);
   if(!entries.length) return;
-  const items = entries.map(([id,qty])=>{
+  const items=entries.map(([id,qty])=>{
     const item=menu.find(i=>i.id==id);
-    return {name:item.name,qty,price:item.price};
+    return{name:item.name,qty,price:item.price};
   });
-  const total = items.reduce((s,i)=>s+i.price*i.qty,0);
-  const orders = getOrders();
-  orders.unshift({id:Date.now(),table:tableNo,items,total,time:new Date().toLocaleTimeString(),date:new Date().toLocaleDateString(),status:'new'});
+  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  const orders=getOrders();
+  orders.unshift({id:Date.now(),name,phone,items,total,time:new Date().toLocaleTimeString(),date:new Date().toLocaleDateString(),status:'new'});
   saveOrders(orders);
   cart={};
   updateCartBar();
@@ -412,14 +491,13 @@ function placeOrder(){
 }
 
 function doLogin(){
+  const creds=getCredentials();
   const u=document.getElementById('login-user').value;
   const p=document.getElementById('login-pass').value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){
+  if(u===creds.user&&p===creds.pass){
     document.getElementById('login-err').style.display='none';
     showPage('page-admin');
-  } else {
-    document.getElementById('login-err').style.display='block';
-  }
+  } else {document.getElementById('login-err').style.display='block';}
 }
 
 function doLogout(){showPage('page-menu');}
@@ -431,19 +509,20 @@ function switchTab(id,btn){
   document.getElementById(id).classList.add('active');
   if(id==='tab-menu') renderMenuMgmt();
   if(id==='tab-orders') renderOrdersTab();
+  if(id==='tab-settings') renderSettingsTab();
 }
 
 function renderAdmin(){renderOrdersTab();renderMenuMgmt();}
 
 function renderOrdersTab(){
   const orders=getOrders();
-  const newOrders=orders.filter(o=>o.status==='new');
-  const doneOrders=orders.filter(o=>o.status==='done');
-  const totalRev=orders.reduce((s,o)=>s+o.total,0);
+  const newO=orders.filter(o=>o.status==='new');
+  const doneO=orders.filter(o=>o.status==='done');
+  const rev=orders.reduce((s,o)=>s+o.total,0);
   document.getElementById('stats-grid').innerHTML=`
-    <div class="stat-card"><div class="stat-label">New orders</div><div class="stat-val">${newOrders.length}</div></div>
-    <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-val">${doneOrders.length}</div></div>
-    <div class="stat-card"><div class="stat-label">Total revenue</div><div class="stat-val">Rs. ${totalRev.toLocaleString()}</div></div>`;
+    <div class="stat-card"><div class="stat-label">New orders</div><div class="stat-val">${newO.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-val">${doneO.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Total revenue</div><div class="stat-val">฿${rev.toLocaleString()}</div></div>`;
   if(!orders.length){
     document.getElementById('orders-list').innerHTML='<div class="empty-state">No orders yet. They will appear here when customers place orders.</div>';
     return;
@@ -457,9 +536,9 @@ function renderOrdersTab(){
         </div>
         <span class="order-status ${o.status==='new'?'status-new':'status-done'}">${o.status==='new'?'New':'Done'}</span>
       </div>
-      <div class="order-table">Table: ${o.table}</div>
-      <div class="order-items">${o.items.map(i=>`${i.qty}x ${i.name} — Rs. ${(i.price*i.qty).toLocaleString()}`).join('<br>')}</div>
-      <div class="order-total">Total: Rs. ${o.total.toLocaleString()}</div>
+      <div class="order-customer">👤 ${o.name} &nbsp;|&nbsp; 📞 ${o.phone}</div>
+      <div class="order-items">${o.items.map(i=>`${i.qty}x ${i.name} — ฿${(i.price*i.qty).toLocaleString()}`).join('<br>')}</div>
+      <div class="order-total">Total: ฿${o.total.toLocaleString()}</div>
       ${o.status==='new'?`<button class="mark-done-btn" onclick="markDone(${o.id})">Mark as done</button>`:''}
     </div>`).join('');
 }
@@ -482,7 +561,7 @@ function renderMenuMgmt(){
       html+=`<div class="mgmt-item">
         <div class="mgmt-item-info">
           <div class="mgmt-item-name">${item.name}</div>
-          <div class="mgmt-item-sub">Rs. ${item.price.toLocaleString()} · ${item.cat}</div>
+          <div class="mgmt-item-sub">฿${item.price.toLocaleString()} · ${item.cat}</div>
         </div>
         <div class="mgmt-actions">
           <button class="toggle-btn ${item.available?'available':'soldout'}" onclick="toggleAvail(${item.id})">${item.available?'Available':'Sold out'}</button>
@@ -494,12 +573,52 @@ function renderMenuMgmt(){
   document.getElementById('menu-mgmt').innerHTML=html;
 }
 
+function renderSettingsTab(){
+  const qrData=getQR();
+  const area=document.getElementById('qr-preview-area');
+  const placeholder=document.getElementById('qr-placeholder');
+  const removeBtn=document.getElementById('qr-remove-btn');
+  const existing=area.querySelector('img');
+  if(existing) existing.remove();
+  if(qrData){
+    placeholder.style.display='none';
+    const img=document.createElement('img');
+    img.src=qrData;img.style.width='100px';img.style.height='100px';
+    img.style.borderRadius='8px';img.style.border='1px solid #e0e0e0';img.style.objectFit='contain';
+    area.insertBefore(img,area.firstChild);
+    removeBtn.style.display='inline-block';
+  } else {
+    placeholder.style.display='flex';
+    removeBtn.style.display='none';
+  }
+}
+
+function handleQRUpload(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    saveQR(ev.target.result);
+    renderSettingsTab();
+    const status=document.getElementById('qr-status');
+    status.style.display='block';
+    setTimeout(()=>status.style.display='none',2500);
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeQR(){
+  if(!confirm('Remove the PromptPay QR code?')) return;
+  removeQRData();
+  renderSettingsTab();
+}
+
 function addDish(){
   const name=document.getElementById('f-name').value.trim();
   const price=parseInt(document.getElementById('f-price').value);
   const cat=document.getElementById('f-cat').value;
   const desc=document.getElementById('f-desc').value.trim();
-  if(!name||!price) return alert('Please enter a name and price');
+  if(!name||!price){alert('Please enter a name and price');return;}
   const tags=[];
   if(document.getElementById('t-veg').checked) tags.push('veg');
   if(document.getElementById('t-spicy').checked) tags.push('spicy');
@@ -517,9 +636,8 @@ function addDish(){
 }
 
 function deleteDish(id){
-  if(!confirm('Remove this dish from the menu?')) return;
-  const menu=getMenu().filter(i=>i.id!==id);
-  saveMenu(menu);
+  if(!confirm('Remove this dish?')) return;
+  saveMenu(getMenu().filter(i=>i.id!==id));
   renderMenuMgmt();
 }
 
@@ -531,14 +649,17 @@ function toggleAvail(id){
   renderMenuMgmt();
 }
 
+function saveCredentials(){
+  const u=document.getElementById('new-user').value.trim();
+  const p=document.getElementById('new-pass').value.trim();
+  if(!u||!p){alert('Please enter both username and password');return;}
+  localStorage.setItem('te_creds',JSON.stringify({user:u,pass:p}));
+  alert('Credentials updated!');
+}
+
 document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter') doLogin();});
 renderMenu();
 </script>
-
-<!-- Admin access link (hidden at bottom) -->
-<div style="text-align:center;padding:1rem;font-size:11px;color:#ddd">
-  <a onclick="showPage('page-login')" style="color:#ccc;cursor:pointer;text-decoration:none">Admin</a>
-</div>
 
 </body>
 </html>
