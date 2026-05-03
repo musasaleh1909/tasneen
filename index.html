@@ -26,6 +26,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .m-item{display:flex;justify-content:space-between;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #f5f5f5;gap:12px}
 .m-item:last-child{border-bottom:none}
 .m-item.sold-out{opacity:.45}
+.item-img{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid #f0f0f0}
+.item-img-placeholder{width:72px;height:72px;border-radius:8px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:#ccc}
 .item-info{flex:1}
 .item-name{font-size:15px;font-weight:500;margin-bottom:3px}
 .item-desc{font-size:12px;color:#888;line-height:1.5}
@@ -136,6 +138,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mgmt-item-info{flex:1}
 .mgmt-item-name{font-size:14px;font-weight:500}
 .mgmt-item-sub{font-size:12px;color:#888}
+.mgmt-item-img{width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid #f0f0f0;flex-shrink:0}
+.mgmt-item-img-placeholder{width:44px;height:44px;border-radius:6px;background:#f5f5f5;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#ccc}
+.img-upload-area{border:2px dashed #e0e0e0;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:border-color .15s}
+.img-upload-area:hover{border-color:#1a1a1a}
+.img-upload-area p{font-size:13px;color:#aaa;margin-bottom:6px}
+.img-preview-thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1px solid #e0e0e0;display:block;margin:0 auto 8px}
+.img-remove-link{font-size:12px;color:#993c1d;cursor:pointer;text-decoration:underline}
 .mgmt-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
 .toggle-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #e0e0e0;background:transparent;cursor:pointer;color:#666}
 .toggle-btn.available{color:#3b6d11;border-color:#c0dd97;background:#eaf3de}
@@ -274,6 +283,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <label>Description</label>
           <textarea id="f-desc" placeholder="Short description..."></textarea>
         </div>
+        <div class="form-group" style="margin-bottom:12px">
+          <label>Food photo (optional)</label>
+          <div class="img-upload-area" onclick="document.getElementById('f-img-input').click()" id="img-upload-area">
+            <p>Click to upload a photo</p>
+            <p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>
+          </div>
+          <input type="file" id="f-img-input" accept="image/*" style="display:none" onchange="handleDishImg(event)">
+        </div>
         <button class="save-btn" onclick="addDish()">Add dish</button>
       </div>
       <div class="menu-mgmt" id="menu-mgmt"></div>
@@ -370,7 +387,11 @@ function renderMenu(){
     items.forEach(item=>{
       const tags=item.tags.map(t=>`<span class="tag tag-${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
       const sold=!item.available;
+      const imgHtml=item.img
+        ?`<img src="${item.img}" class="item-img" alt="${item.name}"/>`
+        :`<div class="item-img-placeholder">🍽</div>`;
       html+=`<div class="m-item${sold?' sold-out':''}">
+        ${imgHtml}
         <div class="item-info">
           <div class="item-name">${item.name}</div>
           <div class="item-desc">${item.desc}</div>
@@ -578,7 +599,11 @@ function renderMenuMgmt(){
   cats.forEach(cat=>{
     html+=`<div class="cat-header">${cat}</div>`;
     menu.filter(i=>i.cat===cat).forEach(item=>{
+      const imgHtml=item.img
+        ?`<img src="${item.img}" class="mgmt-item-img" alt="${item.name}"/>`
+        :`<div class="mgmt-item-img-placeholder">🍽</div>`;
       html+=`<div class="mgmt-item">
+        ${imgHtml}
         <div class="mgmt-item-info">
           <div class="mgmt-item-name">${item.name}</div>
           <div class="mgmt-item-sub">฿${item.price.toLocaleString()} · ${item.cat}</div>
@@ -633,6 +658,28 @@ function removeQR(){
   renderSettingsTab();
 }
 
+let pendingDishImg = null;
+
+function handleDishImg(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    pendingDishImg=ev.target.result;
+    document.getElementById('img-upload-area').innerHTML=`
+      <img src="${pendingDishImg}" class="img-preview-thumb" alt="preview"/>
+      <span class="img-remove-link" onclick="clearDishImg(event)">Remove photo</span>`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearDishImg(e){
+  e.stopPropagation();
+  pendingDishImg=null;
+  document.getElementById('f-img-input').value='';
+  document.getElementById('img-upload-area').innerHTML=`<p>Click to upload a photo</p><p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>`;
+}
+
 function addDish(){
   const name=document.getElementById('f-name').value.trim();
   const price=parseInt(document.getElementById('f-price').value);
@@ -644,7 +691,7 @@ function addDish(){
   if(document.getElementById('t-spicy').checked) tags.push('spicy');
   if(document.getElementById('t-popular').checked) tags.push('popular');
   const menu=getMenu();
-  menu.push({id:Date.now(),name,desc,price,cat,tags,available:true});
+  menu.push({id:Date.now(),name,desc,price,cat,tags,available:true,img:pendingDishImg||null});
   saveMenu(menu);
   document.getElementById('f-name').value='';
   document.getElementById('f-price').value='';
@@ -652,6 +699,9 @@ function addDish(){
   document.getElementById('t-veg').checked=false;
   document.getElementById('t-spicy').checked=false;
   document.getElementById('t-popular').checked=false;
+  pendingDishImg=null;
+  document.getElementById('f-img-input').value='';
+  document.getElementById('img-upload-area').innerHTML=`<p>Click to upload a photo</p><p style="font-size:11px;color:#ccc">JPG, PNG — recommended 400x400px</p>`;
   renderMenuMgmt();
 }
 
